@@ -19,7 +19,7 @@ public class ShipController : MonoBehaviour {
 	}
 
 	void Update () {
-
+        Fire();
 	}
 
 	void FixedUpdate () {
@@ -33,4 +33,10 @@ public class ShipController : MonoBehaviour {
 		movement = movement.normalized * moveSpeed * Time.deltaTime;
 		rb.MovePosition (transform.position + movement);
 	}
+    
+    void Fire () {
+         if (Input.GetButtonDown("Fire1")) {
+             print("pew");
+         }
+    }
 }
