@@ -3,40 +3,40 @@ using System.Collections;
 
 public class ShipController : MonoBehaviour {
 
-	public float moveSpeed = 20.0f;
+    public float moveSpeed = 20.0f;
 
-	private Rigidbody rb;
-	private Vector3 movement;
-	private float movementHorizontalInputValue;
-	private float movementVerticalInputValue;
+    private Rigidbody rb;
+    private Vector3 movement;
+    private float movementHorizontalInputValue;
+    private float movementVerticalInputValue;
 
-	void Awake () {
-		rb = GetComponent<Rigidbody> ();
-	}
+    void Awake () {
+        rb = GetComponent<Rigidbody> ();
+    }
 
-	void Start () {
-		
-	}
+    void Start () {
+        
+    }
 
-	void Update () {
-        Fire();
-	}
+    void Update () {
+        if (Input.GetButtonDown ("Fire1")) {
+            Fire ();
+        }
+    }
 
-	void FixedUpdate () {
-		float movementHorizontalInputValue = Input.GetAxisRaw ("Horizontal");
-		float movementVerticalInputValue = Input.GetAxisRaw ("Vertical");
-		Move (movementHorizontalInputValue, movementVerticalInputValue);
-	}
+    void FixedUpdate () {
+        float movementHorizontalInputValue = Input.GetAxisRaw ("Horizontal");
+        float movementVerticalInputValue = Input.GetAxisRaw ("Vertical");
+        Move (movementHorizontalInputValue, movementVerticalInputValue);
+    }
 
-	void Move (float h, float v) {
-		movement.Set (h, v, 0.0f);
-		movement = movement.normalized * moveSpeed * Time.deltaTime;
-		rb.MovePosition (transform.position + movement);
-	}
-    
+    void Move (float h, float v) {
+        movement.Set (h, v, 0.0f);
+        movement = movement.normalized * moveSpeed * Time.deltaTime;
+        rb.MovePosition (transform.position + movement);
+    }
+
     void Fire () {
-         if (Input.GetButtonDown("Fire1")) {
-             print("pew");
-         }
+        print ("pew");
     }
 }
