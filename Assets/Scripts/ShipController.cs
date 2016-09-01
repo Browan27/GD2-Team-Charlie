@@ -1,9 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[System.Serializable]
+public class PlayerBoundary {
+    public float xMin;
+    public float xMax;
+    public float yMin;
+    public float yMax;
+}
+
 public class ShipController : MonoBehaviour {
 
     public float moveSpeed = 20.0f;
+    public PlayerBoundary boundary;
+    public float frontTilt;
+    public float sideTilt;
 
     private Rigidbody rb;
     private Vector3 movement;
@@ -12,10 +23,6 @@ public class ShipController : MonoBehaviour {
 
     void Awake () {
         rb = GetComponent<Rigidbody> ();
-    }
-
-    void Start () {
-        
     }
 
     void Update () {
@@ -32,8 +39,15 @@ public class ShipController : MonoBehaviour {
 
     void Move (float h, float v) {
         movement.Set (h, v, 0.0f);
-        movement = movement.normalized * moveSpeed * Time.deltaTime;
-        rb.MovePosition (transform.position + movement);
+
+        rb.velocity = movement * moveSpeed;
+        rb.position = new Vector3 (
+            Mathf.Clamp(rb.position.x, boundary.xMin, boundary.xMax),
+            Mathf.Clamp(rb.position.y, boundary.yMin, boundary.yMax),
+            0.0f
+        );
+
+        rb.rotation = Quaternion.Euler (rb.velocity.y * -sideTilt, 0.0f, rb.velocity.x * -frontTilt);
     }
 
     void Fire () {
