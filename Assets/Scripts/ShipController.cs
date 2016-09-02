@@ -48,19 +48,8 @@ public class ShipController : MonoBehaviour {
             0.0f
         );
 
-//        rb.rotation = Quaternion.Euler (
-//            //rb.velocity.y * -sideTilt
-//            Quaternion.Lerp(0.0f, -sideTilt, Time.deltaTime * sideTiltSpeed),
-//            0.0f,
-//            //rb.velocity.x * -frontTilt
-//            Quaternion.Lerp(0.0f, -frontTilt, Time.deltaTime * frontTiltSpeed)
-//        );
-
-        Transform currentTransform = rb.transform;
-        Transform futureTransfom = currentTransform;
-        futureTransfom.rotation = Quaternion.Euler (rb.velocity.y * -sideTilt, 0.0f, rb.velocity.x * -frontTilt);
-
-        rb.rotation = Quaternion.Lerp (currentTransform.rotation, futureTransfom.rotation, Time.time * tiltSpeed);
+        Quaternion futureRotation = Quaternion.Euler(rb.velocity.y * -sideTilt, 0.0f, rb.velocity.x * -frontTilt);
+        rb.rotation = Quaternion.Lerp (rb.rotation, futureRotation, Time.deltaTime * tiltSpeed);
     }
 
     void Fire () {
