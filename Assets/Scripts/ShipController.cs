@@ -22,13 +22,21 @@ public class ShipController : MonoBehaviour {
     private float movementHorizontalInputValue;
     private float movementVerticalInputValue;
 
+    public GameObject Laser;
+    public Transform LaserSpawn;
+    public float fireRate;
+
+    private float nextFire;
+
     void Awake () {
         rb = GetComponent<Rigidbody> ();
     }
 
     void Update () {
-        if (Input.GetButtonDown ("Fire1")) {
+        if (Input.GetButtonDown ("Fire1") && Time.time > nextFire) {
             Fire ();
+            nextFire = Time.time + fireRate;
+            Instantiate(Laser, LaserSpawn.position, LaserSpawn.rotation);
         }
     }
 
