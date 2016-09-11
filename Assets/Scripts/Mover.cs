@@ -11,5 +11,11 @@ public class Mover : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.velocity = transform.forward * speed;
     }
+
+    void Update() {
+        if (rb.position.z >= 75) {
+            GameObject.Destroy (this.gameObject);
+        }
+    }
 	
 }
