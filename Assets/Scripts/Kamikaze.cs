@@ -4,7 +4,7 @@ using System.Collections;
 public class Kamikaze : MonoBehaviour
 {
     public Transform tr_player;
-    float rotSpeed = 3.0f;
+    float rotSpeed = 1.0f;
     public float movespeed;
 
     void Start()
