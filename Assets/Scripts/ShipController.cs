@@ -15,7 +15,9 @@ public class ShipController : MonoBehaviour {
     public PlayerBoundary boundary;
     public float frontTilt;
     public float sideTilt;
+    public float rotationTilt;
     public float tiltSpeed;
+    public float tiltSpeed2;
 
     private Rigidbody rb;
     private Vector3 movement;
@@ -58,6 +60,8 @@ public class ShipController : MonoBehaviour {
 
         Quaternion futureRotation = Quaternion.Euler(rb.velocity.y * -sideTilt, 0.0f, rb.velocity.x * -frontTilt);
         rb.rotation = Quaternion.Lerp (rb.rotation, futureRotation, Time.deltaTime * tiltSpeed);
+        Quaternion futureRotation2 = Quaternion.Euler(rb.rotation.x, rb.velocity.x * rotationTilt, rb.rotation.z);
+        rb.rotation = Quaternion.Lerp(rb.rotation, futureRotation2, Time.deltaTime * tiltSpeed2);
     }
 
     void Fire () {
