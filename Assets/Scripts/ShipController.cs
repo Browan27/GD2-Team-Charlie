@@ -17,7 +17,7 @@ public class ShipController : MonoBehaviour {
     public float sideTilt;
     public float rotationTilt;
     public float tiltSpeed;
-    public float tiltSpeed2;
+    public float turnSpeed;
 
     private Rigidbody rb;
     private Vector3 movement;
@@ -58,10 +58,10 @@ public class ShipController : MonoBehaviour {
             0.0f
         );
 
-        Quaternion futureRotation = Quaternion.Euler(rb.velocity.y * -sideTilt, 0.0f, rb.velocity.x * -frontTilt);
-        rb.rotation = Quaternion.Lerp (rb.rotation, futureRotation, Time.deltaTime * tiltSpeed);
-        Quaternion futureRotation2 = Quaternion.Euler(rb.rotation.x, rb.velocity.x * rotationTilt, rb.rotation.z);
-        rb.rotation = Quaternion.Lerp(rb.rotation, futureRotation2, Time.deltaTime * tiltSpeed2);
+        Quaternion futureRotationInXAndZAxis = Quaternion.Euler(rb.velocity.y * -sideTilt, 0.0f, rb.velocity.x * -frontTilt);
+        rb.rotation = Quaternion.Lerp (rb.rotation, futureRotationInXAndZAxis, Time.deltaTime * tiltSpeed);
+        Quaternion futureRotationInxYAxis = Quaternion.Euler(rb.rotation.x, rb.velocity.x * rotationTilt, rb.rotation.z);
+        rb.rotation = Quaternion.Lerp(rb.rotation, futureRotationInxYAxis, Time.deltaTime * turnSpeed);
     }
 
     void Fire () {
