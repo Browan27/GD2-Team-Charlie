@@ -5,6 +5,7 @@ public class Kamikaze : MonoBehaviour
 {
     private Transform tr_player;
     public float rotSpeed = 1.0f;
+
     public float movespeed;
 
     void Start()
