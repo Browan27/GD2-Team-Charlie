@@ -9,6 +9,5 @@ public class objectDestroyed : MonoBehaviour {
     {
         
         Destroy(gameObject);
-
     }
 }
