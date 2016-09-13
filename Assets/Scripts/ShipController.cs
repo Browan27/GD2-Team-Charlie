@@ -37,8 +37,6 @@ public class ShipController : MonoBehaviour {
     void Update () {
         if (Input.GetButtonDown ("Fire1") && Time.time > nextFire) {
             Fire ();
-            nextFire = Time.time + fireRate;
-            Instantiate(Laser, LaserSpawn.position, LaserSpawn.rotation);
         }
     }
 
@@ -65,6 +63,7 @@ public class ShipController : MonoBehaviour {
     }
 
     void Fire () {
-        print ("pew");
+        nextFire = Time.time + fireRate;
+        Instantiate(Laser, LaserSpawn.position, LaserSpawn.rotation);
     }
 }
