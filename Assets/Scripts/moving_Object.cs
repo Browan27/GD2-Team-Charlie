@@ -13,7 +13,7 @@ public class moving_Object : MonoBehaviour {
     }
 
     void Update() {
-        if (rb.position.z <= -20) {
+        if (rb.position.z <= -30) {
             GameObject.Destroy (this.gameObject);
         }
     }

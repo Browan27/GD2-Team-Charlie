@@ -22,5 +22,9 @@ public class Kamikaze : MonoBehaviour
                 rotSpeed * Time.deltaTime);
         }
         transform.position += transform.forward * movespeed * Time.deltaTime;
+
+        if (transform.position.z <= -30) {//Destroy if out of camera
+            GameObject.Destroy(this.gameObject);
+        }
     }
 }
