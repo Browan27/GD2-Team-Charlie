@@ -10,7 +10,11 @@ public class objectDestroyed : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("Player") || other.CompareTag("Laser")) {
+        if (other.CompareTag("Player")) {
+            //Player Dies
+            Explode();
+        } else if (other.CompareTag("Laser")) {
+            //Player gets points
             Explode();
         }
     }
