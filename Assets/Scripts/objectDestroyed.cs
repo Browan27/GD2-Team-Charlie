@@ -5,9 +5,13 @@ public class objectDestroyed : MonoBehaviour {
 
     GameObject explosion;
 
-    void OnTriggerEnter(Collider other)
-    {
-        
-        Destroy(gameObject);
+    void OnTriggerEnter(Collider other) {
+        Explode();
+    }
+
+    void Explode() {
+        var exp = GetComponentInChildren<ParticleSystem>();
+        exp.Play();
+        Destroy(gameObject, exp.duration);
     }
 }
