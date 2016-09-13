@@ -3,13 +3,20 @@ using System.Collections;
 
 public class objectDestroyed : MonoBehaviour {
 
-    GameObject explosion;
+    private MeshRenderer meshRenderer;
+
+    void Start() {
+        meshRenderer = GetComponentInChildren<MeshRenderer>();
+    }
 
     void OnTriggerEnter(Collider other) {
-        Explode();
+        if (other.CompareTag("Player") || other.CompareTag("Laser")) {
+            Explode();
+        }
     }
 
     void Explode() {
+        meshRenderer.enabled = false;
         var exp = GetComponentInChildren<ParticleSystem>();
         exp.Play();
         Destroy(gameObject, exp.duration);
