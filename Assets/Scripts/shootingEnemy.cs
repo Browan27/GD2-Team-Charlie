@@ -13,9 +13,11 @@ public class shootingEnemy : MonoBehaviour {
 
     private float nextFire;
 
+
     void Start()
     {
         tr_player = GameObject.FindGameObjectWithTag("Player").transform;
+	
     }
 	
 	void Update ()
@@ -35,7 +37,9 @@ public class shootingEnemy : MonoBehaviour {
 
         if (transform.position.z <= -30)
         {
+			//audio.PlayOneShot (explosion_enemy);
             GameObject.Destroy(this.gameObject);
+
         }
     }
 }
