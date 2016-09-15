@@ -11,6 +11,7 @@ public class shootingEnemy : MonoBehaviour {
     public Transform LaserSpawn;
     public float fireRate;
     public float secondShotDelay;
+    public int numberOfShotsInBurst;
 
     private float nextFire;
     private int shotsFired = 0;
@@ -31,7 +32,7 @@ public class shootingEnemy : MonoBehaviour {
                 rotSpeed * Time.deltaTime);
             if (Time.time > nextFire)
             {
-                if (shotsFired % 2 == 0) {
+                if (shotsFired % numberOfShotsInBurst == 0) {
                     nextFire = Time.time + fireRate;
                 } else {
                     nextFire = Time.time + secondShotDelay;
