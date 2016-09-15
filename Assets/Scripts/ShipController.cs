@@ -18,6 +18,7 @@ public class ShipController : MonoBehaviour {
     public float rotationTilt;
     public float tiltSpeed;
     public float turnSpeed;
+    public GameObject PlayerExplosion;
 
     private Rigidbody rb;
     private Vector3 movement;
@@ -72,7 +73,8 @@ public class ShipController : MonoBehaviour {
         if (other.CompareTag("Asteroid") || other.CompareTag("EnemyLaser") || other.CompareTag("Enemy")) {
             //Player dies
             gameController.GameOver();
-            GameObject.Destroy(gameObject);
+            Instantiate(PlayerExplosion, transform.position, transform.rotation);
+            Destroy(gameObject);
         }
     }
 }
