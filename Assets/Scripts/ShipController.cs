@@ -21,8 +21,6 @@ public class ShipController : MonoBehaviour {
 
     private Rigidbody rb;
     private Vector3 movement;
-    private float movementHorizontalInputValue;
-    private float movementVerticalInputValue;
 
     public GameObject Laser;
     public Transform LaserSpawn;
