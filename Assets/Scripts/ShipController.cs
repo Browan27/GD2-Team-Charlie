@@ -15,19 +15,27 @@ public class ShipController : MonoBehaviour {
     public PlayerBoundary boundary;
     public float frontTilt;
     public float sideTilt;
+    public float rotationTilt;
     public float tiltSpeed;
+    public float turnSpeed;
 
     private Rigidbody rb;
     private Vector3 movement;
     private float movementHorizontalInputValue;
     private float movementVerticalInputValue;
 
+    public GameObject Laser;
+    public Transform LaserSpawn;
+    public float fireRate;
+
+    private float nextFire;
+
     void Awake () {
         rb = GetComponent<Rigidbody> ();
     }
 
     void Update () {
-        if (Input.GetButtonDown ("Fire1")) {
+        if (Input.GetButtonDown ("Fire1") && Time.time > nextFire) {
             Fire ();
         }
     }
@@ -48,11 +56,14 @@ public class ShipController : MonoBehaviour {
             0.0f
         );
 
-        Quaternion futureRotation = Quaternion.Euler(rb.velocity.y * -sideTilt, 0.0f, rb.velocity.x * -frontTilt);
-        rb.rotation = Quaternion.Lerp (rb.rotation, futureRotation, Time.deltaTime * tiltSpeed);
+        Quaternion futureRotationInXAndZAxis = Quaternion.Euler(rb.velocity.y * -sideTilt, 0.0f, rb.velocity.x * -frontTilt);
+        rb.rotation = Quaternion.Lerp (rb.rotation, futureRotationInXAndZAxis, Time.deltaTime * tiltSpeed);
+        Quaternion futureRotationInxYAxis = Quaternion.Euler(rb.rotation.x, rb.velocity.x * rotationTilt, rb.rotation.z);
+        rb.rotation = Quaternion.Lerp(rb.rotation, futureRotationInxYAxis, Time.deltaTime * turnSpeed);
     }
 
     void Fire () {
-        print ("pew");
+        nextFire = Time.time + fireRate;
+        Instantiate(Laser, LaserSpawn.position, LaserSpawn.rotation);
     }
 }
