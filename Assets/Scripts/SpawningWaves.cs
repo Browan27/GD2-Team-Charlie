@@ -3,6 +3,8 @@ using System.Collections;
 
 public class SpawningWaves : MonoBehaviour {
 
+    private ScoreKeeper gameController;
+
     public GameObject hazard;
     public GameObject badGuy;
     public GameObject shootingBadGuy;
@@ -17,6 +19,8 @@ public class SpawningWaves : MonoBehaviour {
 
     void Start()
     {
+        GameObject gameControllerObject = GameObject.FindGameObjectWithTag("GameController");
+        gameController = gameControllerObject.GetComponent<ScoreKeeper>();
         StartCoroutine(SpawnWaves());
         StartCoroutine(SpawnBadGuys());
         StartCoroutine(SpawnShootingBadGuys());
@@ -32,6 +36,9 @@ public class SpawningWaves : MonoBehaviour {
 
             Instantiate(hazard, spawnPosition, spawnRotation);
             yield return new WaitForSeconds(waveWaitAstroids);
+            if (gameController.gameOver) {
+                yield break;
+            }
         }
     }
 
@@ -45,6 +52,9 @@ public class SpawningWaves : MonoBehaviour {
 
             Instantiate(badGuy, spawnPosition, spawnRotation);
             yield return new WaitForSeconds(waveWaitBadGuys);
+            if (gameController.gameOver) {
+                yield break;
+            }
         }
     }
 
@@ -57,6 +67,9 @@ public class SpawningWaves : MonoBehaviour {
 
             Instantiate(shootingBadGuy, spawnPosition, spawnRotation);
             yield return new WaitForSeconds(waveWaitShootingBadGuys);
+            if (gameController.gameOver) {
+                yield break;
+            }
         }
     }
 }

@@ -19,13 +19,17 @@ public class shootingEnemy : MonoBehaviour {
 
     void Start()
     {
-        tr_player = GameObject.FindGameObjectWithTag("Player").transform;
+        if (GameObject.FindGameObjectWithTag("Player")) {
+            tr_player = GameObject.FindGameObjectWithTag("Player").transform;
+        } else {
+            tr_player = null;
+        }
 	
     }
 	
 	void Update ()
     {
-        if (transform.position.z >= 15)
+        if (transform.position.z >= 15 && tr_player)
         {
             transform.rotation = Quaternion.Slerp(transform.rotation,
                 Quaternion.LookRotation(tr_player.position - transform.position),

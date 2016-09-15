@@ -21,6 +21,7 @@ public class ShipController : MonoBehaviour {
 
     private Rigidbody rb;
     private Vector3 movement;
+    private ScoreKeeper gameController;
 
     public GameObject Laser;
     public Transform LaserSpawn;
@@ -30,6 +31,8 @@ public class ShipController : MonoBehaviour {
 
     void Awake () {
         rb = GetComponent<Rigidbody> ();
+        GameObject gameControllerObject = GameObject.FindGameObjectWithTag("GameController");
+        gameController = gameControllerObject.GetComponent<ScoreKeeper>();
     }
 
     void Update () {
@@ -63,5 +66,13 @@ public class ShipController : MonoBehaviour {
     void Fire () {
         nextFire = Time.time + fireRate;
         Instantiate(Laser, LaserSpawn.position, LaserSpawn.rotation);
+    }
+
+    void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Asteroid") || other.CompareTag("EnemyLaser") || other.CompareTag("Enemy")) {
+            //Player dies
+            gameController.GameOver();
+            GameObject.Destroy(gameObject);
+        }
     }
 }
