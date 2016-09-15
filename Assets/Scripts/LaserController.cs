@@ -27,9 +27,13 @@ public class LaserController : MonoBehaviour
 
     void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Enemy")) {
+            other.gameObject.tag = "DeadEnemy";
             gameController.AddScore (enemyPoints);
+            GameObject.Destroy(gameObject);
         } else if (other.CompareTag("Asteroid")) {
+            other.gameObject.tag = "DeadAsteroid";
             gameController.AddScore (asteroidPoints);
+            GameObject.Destroy(gameObject);
         }
     }
 	

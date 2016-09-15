@@ -20,9 +20,11 @@ public class objectDestroyed : MonoBehaviour {
     }
 
     void Explode() {
-        meshRenderer.enabled = false;
-        var exp = GetComponentInChildren<ParticleSystem>();
-        exp.Play();
-        Destroy(gameObject, exp.duration);
+        if (meshRenderer.enabled) {
+            meshRenderer.enabled = false;
+            var exp = GetComponentInChildren<ParticleSystem>();
+            exp.Play();
+            Destroy(gameObject, exp.duration);
+        }
     }
 }
