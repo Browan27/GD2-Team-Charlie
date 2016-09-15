@@ -10,8 +10,10 @@ public class shootingEnemy : MonoBehaviour {
     public GameObject Laser;
     public Transform LaserSpawn;
     public float fireRate;
+    public float secondShotDelay;
 
     private float nextFire;
+    private int shotsFired = 0;
 
 
     void Start()
@@ -29,8 +31,13 @@ public class shootingEnemy : MonoBehaviour {
                 rotSpeed * Time.deltaTime);
             if (Time.time > nextFire)
             {
-                nextFire = Time.time + fireRate;
+                if (shotsFired % 2 == 0) {
+                    nextFire = Time.time + fireRate;
+                } else {
+                    nextFire = Time.time + secondShotDelay;
+                }
                 Instantiate(Laser, LaserSpawn.position, LaserSpawn.rotation);
+                shotsFired++;
             }
         }
         transform.position += transform.forward * movespeed * Time.deltaTime;
