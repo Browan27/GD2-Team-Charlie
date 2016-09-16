@@ -70,7 +70,7 @@ public class ShipController : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("Asteroid") || other.CompareTag("EnemyLaser") || other.CompareTag("Enemy")) {
+        if (other.CompareTag("Asteroid") || other.CompareTag("EnemyLaser") || other.CompareTag("Enemy") || other.CompareTag("Shooting Enemy")) {
             //Player dies
             gameController.GameOver();
             Instantiate(PlayerExplosion, transform.position, transform.rotation);
