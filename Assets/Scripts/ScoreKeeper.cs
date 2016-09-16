@@ -36,9 +36,23 @@ public class ScoreKeeper : MonoBehaviour {
         gameOverText.text = "GAME OVER \n Score: " + score;
         scoreText.enabled = false;
         //Set UI to say gameover and show score
+        StartCoroutine(Pause(75));
+    }
+
+   private IEnumerator Pause(int p)
+    {
+        Time.timeScale = 0.1f;
+        float pauseEndTime = Time.realtimeSinceStartup + 5;
+        while(Time.realtimeSinceStartup < pauseEndTime)
+        {
+            yield return 0;
+        }
+        Time.timeScale = 1;
+        Restart();
     }
 
     public void Restart() {
         //TODO restart game
+        Application.LoadLevel(Application.loadedLevel);
     }
 }
